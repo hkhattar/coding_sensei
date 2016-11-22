@@ -1,0 +1,14 @@
+<a href="#/">Home</a>
+<a href="#/index">Logout</a>
+<h1>New Question</h1>
+
+<form ng-submit='create_question()'>
+	<label>
+		Question: <input type="text" ng-model="newQuestion.question">
+	</label>
+	<label>
+		Description:(optional) <input type="text" ng-model="newQuestion.description">
+	</label>
+	<input type="submit" name="submit" value="Submit" >
+	<button ng-click ='cancel()'>Cancel</button>
+</form>

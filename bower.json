@@ -1,0 +1,21 @@
+{
+  "name": "file_structure",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Sara Wong <1sarabyte@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-route": "^1.5.8"
+  }
+}

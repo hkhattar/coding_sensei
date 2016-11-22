@@ -1,0 +1,15 @@
+<a href="#/">Home</a>|<a href="#/question/{{question._id}}/new_answer">Answer this Question</a>
+<a href="#/index">Logout</a>
+
+<h1>{{question.question}}</h1>
+<p>{{question.description}}</p>
+
+
+<ul ng-repeat = "answer in question._answers">
+	<li>Answered by: {{answer}}</li>
+	<li>Answer content: {{answer.answer.answer}}</li>
+
+	
+</ul>
+
+{{answers}}

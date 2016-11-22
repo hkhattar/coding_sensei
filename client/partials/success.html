@@ -1,0 +1,25 @@
+<h1>Hi, {{getUser()}}!{{hello}}</h1>
+<a href="#/new_question">Add a question</a>
+<a href="#/index">Logout</a>
+<p>Search</p>
+<table>
+	<thead>
+		<tr>
+			<th>Question</th>
+			<th>Answers</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			
+		</tr>
+		<tr ng-repeat='question in questions'>
+			<td>{{question.question}}</td>
+			<td>{{question._answers.length}}</td>
+
+			<td><a href="#/question/{{question._id}}">Show</a>
+			<a href="#/question/{{question._id}}/new_answer">Answer</a></td>
+		</tr>
+	</tbody>
+</table>
