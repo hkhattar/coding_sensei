@@ -21,4 +21,7 @@ module.exports = function(app){
 	app.get('/questions/:id',users.show_question);
 
 	app.post('/answers/:id',users.create_answer);
+
+	app.put('/answers/:id', users.answer_update);
+
 }

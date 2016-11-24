@@ -1,15 +1,24 @@
 <a href="#/">Home</a>|<a href="#/question/{{question._id}}/new_answer">Answer this Question</a>
 <a href="#/index">Logout</a>
 
+
 <h1>{{question.question}}</h1>
-<p>{{question.description}}</p>
+	<p>{{question.description}}</p>
+	
+	
 
 
-<ul ng-repeat = "answer in question._answers">
-	<li>Answered by: {{answer}}</li>
-	<li>Answer content: {{answer.answer.answer}}</li>
+<ul ng-repeat = "answer in question._answers track by $index">
+	
+	<li>Answeredd by: {{answer.name}}</li>
+	<li>Answer content: {{answer.answer}}</li>
+	<li>Answer details: {{answer.details}}</li>
+	<p>Likes: {{answer.likes}}</p>
+    <button type="button" ng-click = "plusLike(answer._id, answer.likes)">Like?</button>
 
 	
 </ul>
 
-{{answers}}
+
+
+

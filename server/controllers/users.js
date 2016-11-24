@@ -12,7 +12,8 @@ module.exports = {
 
 	index_question: function(req,res){
 		console.log("inside question index in routes");
-		Question.find({},false,true).populate('answers').exec(function(err,questions){
+		Question.find({},false,true).populate('_answers').exec(function(err,questions){
+
 			console.log(questions);
 			res.json(questions);
 		});
@@ -44,7 +45,7 @@ module.exports = {
 		Question.findOne({_id:req.params.id},function(err,result){
 			res.json(result);
 		})
-		.populate('answers').exec(function(err,question){
+		.populate('_answers').exec(function(err,question){
 			console.log('error', err);
 		})
 	},
@@ -54,10 +55,11 @@ module.exports = {
 		console.log('create_answer in server controller');
 		Question.findOne({_id:req.params.id},function(err,question)
 		{
-			var answer = new Answer({details:req.body.answer.details, answer:req.body.answer.answer});
-	
+			var answer = new Answer({details:req.body.answer.details, answer:req.body.answer.answer, name:req.body.name});
+
 			console.log('POST DATA', req.body)
 			console.log('req.body.answer.answer',req.body.answer.answer)
+			console.log('req.body.name',req.body.name);
 			console.log('answer',answer);
 			console.log(question._id);
 			answer._question = question._id;
@@ -74,13 +76,34 @@ module.exports = {
 					else
 					{
 						console.log('successfully added an answer');
-						res.json(question);
+						console.log('question',question)
+						console.log('answer',answer)
+						res.json(answer);
 					}
 
 				})
 				
 			})
 		})
+	},
+
+	answer_update : function(req,res){
+		console.log('answer_update server controller');
+		console.log('req.params.id',req.params.id);
+		console.log('req.body',req.body);
+		var likes = req.body.likes;
+
+		Answer.update({_id: req.params.id},
+			{$set: {likes:likes}},
+			function(err,result){
+				if(err){
+					console.log(err);
+				}
+				else{
+					res.json(result);
+				}
+			})
+
 	}
 
 
