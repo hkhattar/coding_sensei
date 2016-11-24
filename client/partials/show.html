@@ -6,9 +6,10 @@
 	<p>{{question.description}}</p>
 	
 	
+	
 
 
-<ul ng-repeat = "answer in question._answers track by $index">
+<ul ng-repeat = "answer in question._answers | orderBy:'-likes'">
 	
 	<li>Answeredd by: {{answer.name}}</li>
 	<li>Answer content: {{answer.answer}}</li>
