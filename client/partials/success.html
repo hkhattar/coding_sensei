@@ -1,8 +1,10 @@
 <h1>Hi, {{current_user}}!</h1>
 <a href="#/new_question">Add a question</a>
 <a href="#/index">Logout</a>
-<p>Search</p>
-<table>
+<br><br>
+<label>Search: <input ng-model="searchText"></label>
+
+<table id="searchTextResults">
 	<thead>
 		<tr>
 			<th>Question</th>
@@ -14,7 +16,7 @@
 		<tr>
 			
 		</tr>
-		<tr ng-repeat='question in questions'>
+		<tr ng-repeat='question in questions | filter:searchText'>
 			<td>{{question.question}}</td>
 			<td>{{question._answers.length}}</td>
 
