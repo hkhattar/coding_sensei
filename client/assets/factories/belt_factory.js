@@ -44,6 +44,7 @@ app.factory('belt_factory',function($http){
   {
     $http.post('/questions', newQuestion).then(function(returned_data)
     {
+      console.log('newQuestion',newQuestion)
       if (typeof(callback) == 'function')
       {
         callback(returned_data.data);

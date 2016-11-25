@@ -75,8 +75,11 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       {
         if($scope.newQuestion.question.length > 10)
         {
+          console.log('inside create question clinet controller');
           $scope.error = {};
+          console.log('$scope.newQuestion',$scope.newQuestion)
           belt_factory.create_question($scope.newQuestion,setQuestions);
+
           $scope.newQuestion = {};
           $location.url('/');
         }

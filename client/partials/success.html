@@ -9,6 +9,7 @@
 		<tr>
 			<th>Question</th>
 			<th>Answers</th>
+			<th>Category</th>
 			<th>Action</th>
 		</tr>
 	</thead>
@@ -19,6 +20,7 @@
 		<tr ng-repeat='question in questions | filter:searchText'>
 			<td>{{question.question}}</td>
 			<td>{{question._answers.length}}</td>
+			<td>{{question.category}}</td>
 
 			<td><a href="#/question/{{question._id}}">Show</a>
 			<a href="#/question/{{question._id}}/new_answer">Answer</a></td>

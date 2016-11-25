@@ -26,7 +26,7 @@ module.exports = {
 		console.log('inside question create server controller')
 		console.log('POST DATA',req.body);
 		
-		var question = new Question({question:req.body.question,description:req.body.description});
+		var question = new Question({question:req.body.question,description:req.body.description,category:req.body.category});
 		question.save(function(err,data){
 		
 			if(err){
@@ -34,6 +34,7 @@ module.exports = {
 			}
 			else{
 				res.json(data)
+				
 			}
 
 		})
