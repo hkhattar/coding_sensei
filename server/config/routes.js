@@ -24,4 +24,9 @@ module.exports = function(app){
 
 	app.put('/answers/:id', users.answer_update);
 
+	app.post('/users', users.register_user);
+
+	app.get('/users',users.index_user);
+	
+
 }

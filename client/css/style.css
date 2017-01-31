@@ -1,0 +1,49 @@
+*{  
+	font-family: 'robot';
+	font-size: 20px;
+}
+
+#logout{
+	text-align: right;
+
+
+}
+
+#logout a{
+	
+	/*border: solid 1px black;*/
+	padding:5px;
+	margin:5px;
+	/*background-color: grey;*/
+	color:white;
+}
+
+a{
+	text-decoration: none;
+}
+
+/* Custom Stylesheet */
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+.icon-block {
+  padding: 0 15px;
+}
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.bottom_margin
+{
+	margin-bottom: 50px;
+}
+
+/*to center the number of answers*/
+.center
+{
+	text-align:center;
+}

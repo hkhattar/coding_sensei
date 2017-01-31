@@ -22,9 +22,7 @@ app.factory('belt_factory',function($http){
       }
 
 
-      factory.getUser = function(){
-        return user;
-      }
+      
 
       factory.get_user = function(callback){
     callback(current_user);
@@ -34,6 +32,10 @@ app.factory('belt_factory',function($http){
     current_user = user;
     callback(current_user);
   }
+
+  factory.getUser = function(){
+        return current_user;
+      }
 
   // factory.set_question = function(question,callback){
   //   current_question = question;
@@ -52,25 +54,49 @@ app.factory('belt_factory',function($http){
     });
   }
 
-       factory.index_question = function(callback){
-        console.log('factory index_question')
-        $http.get('/questions').then(function(returned_data){
-          console.log('returned_data',returned_data);
-          console.log(returned_data.data);
-          if(typeof(callback) == 'function'){
-            callback(returned_data.data);
-          }
+    factory.register_user = function(user,callback)
+  {
+    $http.post('/users', user).then(function(returned_data)
+    {
+      console.log('user',user)
+      if (typeof(callback) == 'function')
+      {
+        
+        callback(returned_data.data);
+      }
+    });
+  }
 
-        })
-       }
-
-       factory.get_question_by_id = function(id,callback){
-        console.log('factory.get_question_by_id');
-        $http.get('/questions/' + id).then(function(returned_data){
+    factory.index_question = function(callback)
+    {
+      $http.get('/questions').then(function(returned_data)
+      {
+        if(typeof(callback) == 'function')
+        {
           callback(returned_data.data);
-          console.log('returned_data.data',returned_data.data);
-        })
-       }
+        }
+      })
+    }
+
+    factory.index_user = function(callback)
+    {
+      $http.get('/users').then(function(returned_data)
+      {
+        if(typeof(callback) == 'function')
+        {
+          callback(returned_data.data);
+        }
+      })
+    }
+
+    factory.get_question_by_id = function(id,callback)
+    {
+      $http.get('/questions/' + id).then(function(returned_data)
+      {
+        callback(returned_data.data);
+          
+      })
+    }
 
        factory.create_answer_by_id = function(id,answerContent, user, callback){
         console.log('create_answer_by_id in factory');

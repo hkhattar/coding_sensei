@@ -5,12 +5,22 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       var questions = [];
       var answers = [];
       var answer = {};
+      var users = [];
       $scope.error = {};
+      
+      $scope.users={};
 
       function setQuestions(data)
       {
         $scope.questions = data;
       }
+
+      function setUsers(data){
+        $scope.users = data;
+        console.log('$scope.users*****',$scope.users)
+
+      }
+
 
       function setAnswers(data)
       {
@@ -41,19 +51,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       }
 
-      // $scope.create_question = function()
-      // {
-      //  if($scope.newQuestion.question.length > 10)
-      //   {
-      //     $scope.error = {};
-      //     belt_factory.set_question($scope.newQusetion.question, function(data){
-      //     $scope.current_question = data;
-      //     $location.url('/');
-      //   })
-      //   }else{
-      //     $scope.error = {message: 'Your name must be at least 6 characters long!'};
-      //   }
-      // }
+    
 
       belt_factory.get_user(function(data)
       {
@@ -63,12 +61,33 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       $scope.getUser = function()
       {
         user = belt_factory.getUser();
+        console.log("0000000000")
+        console.log(user)
         return user;
       }
 
       $scope.cancel=function()
       {
         $location.url('/');
+      }
+
+        $scope.register_user = function()
+      {
+        if($scope.user.first_name.length > 4)
+        {
+          console.log('inside register user client controller');
+          $scope.error = {};
+          console.log('$scope.user',$scope.user)
+          belt_factory.register_user($scope.user,setUsers);
+          console.log('$scope.user',$scope.user)
+
+          $scope.user = {};
+          $location.url('/');
+        }
+        else{
+          $scope.error = {message: 'Your name must be at least 4 characters long!'};
+        }
+     
       }
 
       $scope.create_question = function()
@@ -94,7 +113,14 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         if($scope.newAnswer.answer.length > 5)
         {
           $scope.error = {};
-          var user = belt_factory.getUser();
+          // var user = belt_factory.getUser();
+          // $scope.newAnswer.name=user;
+          // var user = $scope.newAnswer.name;
+          var user=belt_factory.getUser();
+          console.log("pppppppppppppppppppppppppppppp")
+          console.log("user")
+          console.log(user)
+          console.log($scope.newAnswer)
           belt_factory.create_answer_by_id($routeParams.id,$scope.newAnswer,user,function(data)
           {
             $scope.answer = data;
@@ -123,6 +149,15 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       }
 
       $scope.index_question();
+
+      $scope.index_user = function(){
+        belt_factory.index_user(function(data){
+          $scope.users = data;
+          $scope.user = {};
+        })
+      }
+
+      $scope.index_user();
 
       $scope.get_question_by_id = function()
       {

@@ -1,24 +1,38 @@
-<a href="#/">Home</a>|<a href="#/question/{{question._id}}/new_answer">Answer this Question</a>
-<a href="#/index">Logout</a>
+<a href="#/" class='btn'>Home</a>
+<a href="#/question/{{question._id}}/new_answer" class='btn'>Answer this Question</a>
+<div class='right-align'>
+	<a href="#/index" class='btn'>Logout</a>
+</div>
 
 
-<h1>{{question.question}}</h1>
-	<p>{{question.description}}</p>
-	<p>{{question.category}}</p>
-	
-	
+
+<div class="container">
+	<div class="row">
+		<div class="col s12 m6 offset-m3">
+			<div class="card">
+				<div class="card-content">
+					
+
+					<h1>{{question.question}}</h1>
+						<p>{{question.description}}</p>
+						<p>{{question.category}}</p>
+						
+						
 
 
-<ul ng-repeat = "answer in question._answers | orderBy:'-likes'">
-	
-	<li>Answeredd by: {{answer.name}}</li>
-	<li>Answer content: {{answer.answer}}</li>
-	<li>Answer details: {{answer.details}}</li>
-	<p>Likes: {{answer.likes}}</p>
-    <button type="button" ng-click = "plusLike(answer._id, answer.likes)">Like?</button>
-
-	
-</ul>
+					<ul ng-repeat = "answer in question._answers | orderBy:'-likes'">
+						
+						<li>Answeredd by: {{answer.name}}</li>
+						<li>Answer content: {{answer.answer}}</li>
+						<li>Answer details: {{answer.details}}</li>
+						<p>Likes: {{answer.likes}}</p>
+					    <button type="button" ng-click = "plusLike(answer._id, answer.likes)">Like?</button>
+					</ul>
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
 
 
 

@@ -1,16 +1,65 @@
-<a href="#/">Home</a>|
-|<a href="#/question/{{question._id}}">Go back to question</a>|
-|<a href="#/index">Logout</a>
+{{current_user}}
 
-<h1>{{question.question}}</h1>
-<p>{{question.description}}</p>
+<a href="#/" class="btn">Home</a>
+<a href="#/question/{{question._id}}" class='btn'>Go back to question</a>
+<div class='right-align'>
+	<a href="#/index" class='btn'>Logout</a>
+</div>
 
+<div class="container">
+ 	<div class="row">
+		<div class="col s12 m6 offset-m3">
+			<div class="card">
+				<div class="card-content">
 
-<form>
-	<label>Your answer: <br><textarea rows="10" cols="50" type="text" ng-model="newAnswer.answer"></textarea></label><br>
-	<label>Supporting details for your answer(optional)<br><textarea rows="10" cols="50" type="text" ng-model="newAnswer.details"></textarea></label><br>
-	<input type="submit" name="submit" value="Submit" ng-click="create_answer_by_id()">
-	<button ng-click ='cancel()'>Cancel</button>
-</form>
+					<h1>{{question.question}}</h1>
+					<p>{{question.description}}</p>
+				<!-- 	<form>
+            			<div class="row">
+              				<div class="input-field col s12">
+                				<input placeholder="Your answer" id="youranswer" type="text" class="validate" ng-model='newAswer.answer' name="name">
+                				<label for="youranswer" class="active"></label>
+              				</div>
+            			</div>
+            			<div class="row">
+              				<div class="input-field col s12">
+                				<input placeholder="Supporting details for your answer(optional)" id="details" type="text" class="validate" ng-model="newAnswer.details">
+                				{{ error.message }}
+                				<label for="details" class="active"></label>
+              				</div>
+            			</div>
+            			<input type="submit" name='submit' class="btn" value="SUBMIT" ng-click='create_answer_by_id()'>
+          			</form> -->
 
-<br>{{ error.message }}
+					<form>
+						<div class='row'>
+							<div class="input-field col s12">
+								<!-- <input placeholder="Your answer" id="youranswer" type="text" class="validate" ng-model='newAswer.answer' name="name">
+                				<label for="youranswer" class="active"></label> -->
+								Your answer: <br><textarea rows="30" cols="50" type="text" ng-model="newAnswer.answer" class='validate' id='youranswer'></textarea><br>
+								<label for="youranswer" class="active"></label> 
+							</div>
+						</div>
+						
+						<div class='row'>
+							<div class="input-field col s12">
+								<!-- <input placeholder="Supporting details for your answer(optional)" id="details" type="text" class="validate" ng-model="newAnswer.details">
+                				{{ error.message }}
+                				<label for="details" class="active"></label> -->
+								Supporting details for your answer(optional)<br><textarea rows="20" cols="50" type="text" ng-model="newAnswer.details" class="valiate" id='details'></textarea><br>
+								<label for="details" class="active"></label> 
+							</div>
+						</div>
+						<input type="hidden" ng-model="newAnswer.name" value="current_user">
+						
+						<input type="submit" name="submit" value="Submit" ng-click="create_answer_by_id()" class="btn">
+						<button ng-click ='cancel()' class='btn'>Cancel</button>
+					</form>
+
+					<br>{{ error.message }}
+
+				</div>
+			</div>
+		</div>
+  	</div>
+</div>

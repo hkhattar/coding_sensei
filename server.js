@@ -5,6 +5,7 @@ var path = require('path');
 // Create an Express App
 var app = express();
 // Require body-parser (to receive post data from clients)
+// var bcrypt = require('bcryptjs');
 var bodyParser = require('body-parser');
 // new code:
 var session = require('express-session');

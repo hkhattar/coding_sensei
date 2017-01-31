@@ -15,6 +15,11 @@ $routeProvider
           templateUrl: 'partials/success.html',
            controller: 'belt_controller'
         })
+
+        .when('/register',{
+          templateUrl: 'partials/Registration.html',
+           controller: 'belt_controller'
+        })
         .when('/new_question',{
           templateUrl: 'partials/new_question.html',
           controller: 'belt_controller'
@@ -29,6 +34,15 @@ $routeProvider
         	templateUrl: 'partials/new_answer.html',
       		controller: 'belt_controller'
         })
+
+         .when('/users',{
+          templateUrl: 'partials/users.html',
+          controller: 'belt_controller'
+        })
       
+       .when('/about',{
+          templateUrl: 'partials/about.html',
+          controller: 'belt_controller'
+        })
 
 });

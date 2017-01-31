@@ -6,6 +6,7 @@ console.log('belt server controller')
 var mongoose = require('mongoose');
 var Question = mongoose.model('Question');
 var Answer = mongoose.model('Answer');
+var User = mongoose.model('User');
 
 module.exports = {
 
@@ -18,6 +19,15 @@ module.exports = {
 			res.json(questions);
 		});
 	},
+
+	index_user: function(req,res){
+		console.log("inside user index in routes");
+		User.find({},false,true).populate('_answers').exec(function(err,users){
+
+			console.log(users);
+			res.json(users);
+		});
+	},
 	
 
 
@@ -28,6 +38,27 @@ module.exports = {
 		
 		var question = new Question({question:req.body.question,description:req.body.description,category:req.body.category});
 		question.save(function(err,data){
+		
+			if(err){
+				console.log('ERR', err)
+			}
+			else{
+				res.json(data)
+				
+			}
+
+		})
+
+		
+	},
+
+	register_user: function(req,res)
+	{
+		console.log('inside register user server controller')
+		console.log('POST DATA',req.body);
+		
+		var user = new User({first_name:req.body.first_name,last_name:req.body.last_name,password:req.body.password,user_name:req.body.user_name});
+		user.save(function(err,data){
 		
 			if(err){
 				console.log('ERR', err)
