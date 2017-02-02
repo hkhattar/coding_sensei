@@ -1,8 +1,28 @@
 
-<h1>{{current_user}}</h1>
-<h1>{{get_user()}}</h1>
-<h2>{{getUser()}}</h2>
+<!-- <h1>{{current_user}}</h1>
+<a id="logo-container" href="#" class="brand-logo"> </a>
+<h1>{{get_user()}}</h1> -->
 
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+    	<ul>
+    		<li id='logo'></li>
+    	</ul>
+      <ul class="right hide-on-med-and-down">
+      	<li><a href="#/">Home</a></li>
+        <li><a href="#/new_question">Ask Questions</a></li>
+        <li><a href="#/users">Users</a></li>
+        <li><a href="#/index">Log Out</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">About us</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+<h5 class='right-align'>{{getUser()}}   </h5>
+<!-- <div id='logo'></div> -->
 
 
 <!-- <div class='left-align'>
@@ -18,9 +38,9 @@
 
 </div> -->
 
-<div id="logout"><a href="#/new_question" class="btn">Ask Question</a>
+<!-- <div id="logout"><a href="#/new_question" class="btn">Ask Question</a>
 <a href="#/users" class="btn">Users</a>
-<a  href="#/index" class="btn">Logout</a></div>
+<a  href="#/index" class="btn">Logout</a></div> -->
 
 <br><br>
 
@@ -44,26 +64,34 @@
 				    </div>
 				  </nav>
 <!-- table of all the questions,answers,category and action -->
+					<h3>Top Questions</h3>
 					<table id="searchTextResults" class='highlight' >
-						<thead>
+						<!-- <thead>
 							<tr>
 								<th>Question</th>
 								<th>Answers</th>
-								<th>Category</th>
+								<th>Technology</th>
 								<th>Action</th>
 							</tr>
-						</thead>
+						</thead> -->
 						<tbody>
 							<tr>
 								
 							</tr>
 							<tr ng-repeat='question in questions | filter:searchText'>
-								<td>{{question.question}}</td>
-								<td class='center'>{{question._answers.length}}</td>
-								<td>{{question.category}}</td>
+								<td class='center'>
+									<div id='answer'>
+										<a href="#/question/{{question._id}}" class="link_answer" >{{question._answers.length}} answer</a>
+									</div>
+									
+								</td>
+								<td><a href="#/question/{{question._id}}">{{question.question}}</a>
+								<br>{{question.category}}</td>
+								
+								<!-- <td>{{question.category}}</td> -->
 
-								<td><a href="#/question/{{question._id}}">Show</a>
-								<a href="#/question/{{question._id}}/new_answer">Answer</a></td>
+								<td>
+								<!-- <a href="#/question/{{question._id}}/new_answer">Answer</a></td> -->
 							</tr>
 						</tbody>
 					</table>

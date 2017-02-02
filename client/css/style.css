@@ -9,6 +9,17 @@
 
 }
 
+#logo{
+	background-image: url("/images/Logomakr_8rKXqY.png");
+	background-repeat: no-repeat;
+	background-size: 200px 50px;
+	width: 200px;
+	height: 50px;
+	padding:15px;
+	margin-left: 10px;
+	border:solid transparent 1px;
+}
+
 #logout a{
 	
 	/*border: solid 1px black;*/
@@ -46,4 +57,43 @@ a{
 .center
 {
 	text-align:center;
+}
+
+/*a
+{
+	color: green;
+    padding: 14px 25px;
+    text-align: center;
+    text-decoration: none;
+    /*display: inline-block;*/
+    /*border: solid green 1px;*/
+/*}*/
+
+a.link_answer 
+{
+	color:green;
+}
+
+i.icon-blue {
+    color: blue;
+}
+
+#answer
+{
+	color: lightgreen;
+
+    padding-right: 4px;
+    padding-left: 4px;
+    padding-top: 2px;
+
+    /*text-align: center;*/
+    /*text-decoration: none;*/
+    /*display: inline-block;*/
+    border: solid green 1px;
+
+}
+
+.description
+{
+	margin-left: 70px;
 }

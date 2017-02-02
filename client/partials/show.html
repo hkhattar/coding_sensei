@@ -1,38 +1,158 @@
-<a href="#/" class='btn'>Home</a>
+
+<nav class="light-blue lighten-1" role="navigation">
+    <div class="nav-wrapper container">
+    	<ul>
+    		<li id='logo'></li>
+    	</ul>
+      <ul class="right hide-on-med-and-down">
+      	<li><a href="#/">Home</a></li>
+        <li><a href="#/new_question">Ask Questions</a></li>
+        <li><a href="#/users">Users</a></li>
+        <li><a href="#/index">Log Out</a></li>
+      </ul>
+
+      <ul id="nav-mobile" class="side-nav">
+        <li><a href="#">About us</a></li>
+      </ul>
+      <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+    </div>
+  </nav>
+
+
+
+<h5 class='right-align'>{{getUser()}}   </h5>
+<!-- <div id='logo'></div> -->
+
+
+
+<!-- <a href="#/" class='btn'>Home</a>
 <a href="#/question/{{question._id}}/new_answer" class='btn'>Answer this Question</a>
 <div class='right-align'>
 	<a href="#/index" class='btn'>Logout</a>
-</div>
+</div> -->
 
 
-
+<br><br>
 <div class="container">
 	<div class="row">
-		<div class="col s12 m6 offset-m3">
+		<div class="col s18 m12 offset-m0">
 			<div class="card">
 				<div class="card-content">
 					
 
-					<h1>{{question.question}}</h1>
-						<p>{{question.description}}</p>
-						<p>{{question.category}}</p>
+					<h3>{{question.question}}</h3>
+					<!-- <h3>{{question._answers.length}}</h3> -->
 						
+					<hr>
+
+						<div class="col s18 offset-s1">{{question.description}}</div>
+						<!-- <p class=''> {{question.description}}</p> -->
+						<!-- <p class='btn'>{{question.category}}</p> -->
+						<br><br>
+
+					
 						
 
+					<!-- <h6 id='no_answer'>Can you help? Coding Sensei depends on everyone sharing their knowledge. If you're able to answer this question, please do!</h6> -->
+						<!-- <div id = "custom-tag"> </div> -->
+
+
+					
+					<h4 >Answers</h4>
+					<hr>
 
 					<ul ng-repeat = "answer in question._answers | orderBy:'-likes'">
+
 						
-						<li>Answeredd by: {{answer.name}}</li>
-						<li>Answer content: {{answer.answer}}</li>
-						<li>Answer details: {{answer.details}}</li>
-						<p>Likes: {{answer.likes}}</p>
-					    <button type="button" ng-click = "plusLike(answer._id, answer.likes)">Like?</button>
+							
+							
+						<p><i class="material-icons icon-blue">thumb_up</i> {{answer.likes}}</p>
+						<div class="col s18 offset-s1">{{answer.answer}}
+							<p>
+								<button type="button"  ng-click = "plusLike(answer._id, answer.likes)"> <i class="material-icons ">thumb_up</i> Like</button>
+							</p>	
+						</div>
+						<!-- <li>{{answer.answer}}</li> -->
+
+						<li>{{answer.details}}</li>
+						
+							<!-- <li class='right-align'><button type="button"  ng-click = "plusLike(answer._id, answer.likes)"> <i class="material-icons ">thumb_up</i> Like</button>
+						</li> -->
+						
+						
+						<li class='right-align'> <span style="color:grey;">answered by: {{answer.name}}</span> </li>
+						
+					    
+					    
+					    
+					    <hr>
 					</ul>
 				</div>
 			</div>
 		</div>	
 	</div>
 </div>
+
+
+<div class="container">
+ 	<div class="row">
+		<div class="col s18 m12 offset-m0">
+			<div class="card">
+				<div class="card-content">
+
+					<h5>Your Answer</h5>
+					<!-- <h1>{{question.question}}</h1>
+					<p>{{question.description}}</p> -->
+				<!-- 	<form>
+            			<div class="row">
+              				<div class="input-field col s12">
+                				<input placeholder="Your answer" id="youranswer" type="text" class="validate" ng-model='newAswer.answer' name="name">
+                				<label for="youranswer" class="active"></label>
+              				</div>
+            			</div>
+            			<div class="row">
+              				<div class="input-field col s12">
+                				<input placeholder="Supporting details for your answer(optional)" id="details" type="text" class="validate" ng-model="newAnswer.details">
+                				{{ error.message }}
+                				<label for="details" class="active"></label>
+              				</div>
+            			</div>
+            			<input type="submit" name='submit' class="btn" value="SUBMIT" ng-click='create_answer_by_id()'>
+          			</form> -->
+
+					<form>
+						<div class='row'>
+							<div class="input-field col s12">
+								<!-- <input placeholder="Your answer" id="youranswer" type="text" class="validate" ng-model='newAswer.answer' name="name">
+                				<label for="youranswer" class="active"></label> -->
+							 <textarea rows="30" cols="50" type="text" ng-model="newAnswer.answer" class='validate' id='youranswer'></textarea><br>
+								<label for="youranswer" class="active"></label> 
+							</div>
+						</div>
+						
+						<div class='row'>
+							<div class="input-field col s12">
+								<!-- <input placeholder="Supporting details for your answer(optional)" id="details" type="text" class="validate" ng-model="newAnswer.details">
+                				{{ error.message }}
+                				<label for="details" class="active"></label> -->
+								Supporting details for your answer(optional)<br><textarea rows="20" cols="50" type="text" ng-model="newAnswer.details" class="valiate" id='details'></textarea><br>
+								<label for="details" class="active"></label> 
+							</div>
+						</div>
+						<input type="hidden" ng-model="newAnswer.name" value="current_user">
+						
+						<input type="submit" name="submit" value="Submit" ng-click="create_answer_by_id()" class="btn">
+						<!-- <button ng-click ='cancel()' class='btn'>Cancel</button> -->
+					</form>
+
+					<br>{{ error.message }}
+
+				</div>
+			</div>
+		</div>
+  	</div>
+</div>
+
 
 
 
