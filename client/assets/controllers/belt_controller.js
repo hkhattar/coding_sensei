@@ -2,26 +2,73 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
     function($scope,$cookies,$location,$routeParams,belt_factory)
     {
-      var questions = [];
-      var answers = [];
+      console.log('belt_controller loaded');
+
+
+       var answers = [];
       var answer = {};
       var users = [];
       $scope.error = {};
       
       $scope.users={};
+      
+      $scope.register_user = function()
+      {
+
+        if($scope.user.first_name.length > 1)
+        {
+          console.log('inside register user client controller');
+          $scope.error = {};
+          console.log('$scope.user in belt controller before factory',$scope.user)
+          belt_factory.register_user($scope.user,setUsers);
+          console.log('$scope.user in belt controller after factory',$scope.user)
+
+          $scope.user = {};
+          $location.url('/');
+        }
+        else{
+          $scope.error = {message: 'Your name must be at least 2 characters long!'};
+        }
+     
+      }
+      // var questions = [];
+//       var x = 3;
+// $scope.y = 3;
+
+// {{x}} - undefined
+// {{y}} - 3
+     
+       $scope.log_get_user = function()
+      {
+        user = belt_factory.log_get_user();
+        console.log("0000000000")
+        console.log(user)
+        return user;
+      }
+   
+      
 
       function setQuestions(data)
       {
-        $scope.questions = data;
+        $scope.questionss = data;
       }
-
+      var logged_in_user ;
       function setUsers(data){
-        $scope.users = data;
-        console.log('$scope.users*****',$scope.users)
-
+        console.log('inside belt controller setUsers')
+        // $scope.logged_in_user = data;
+        $scope.logged_in_user = data;
+        // $scope.hello = data;
+        console.log('logged_in_user inside setUsers',logged_in_user)
+        // console.log('what')
+      
+        
       }
+    
+      console.log('logged_in_user outside setUsers',logged_in_user)
+      // $scope.logged_in_user = 'logged_in_user';
 
-
+      $scope.logged_in_user=logged_in_user;
+      // $scope.setUsers();
       function setAnswers(data)
       {
         $scope.answers = data;
@@ -34,11 +81,11 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         $scope.answer = data;
       }
       
-      console.log('belt_controller loaded');
+      
 
       $scope.create_new_user = function()
       {
-        if($scope.new_user.length > 5)
+        if($scope.new_user.length > 1)
         {
           $scope.error = {};
           belt_factory.set_user($scope.new_user, function(data){
@@ -46,7 +93,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
           $location.url('/');
         })
         }else{
-          $scope.error = {message: 'Your name must be at least 6 characters long!'};
+          $scope.error = {message: 'Your name must be at least 2 characters long!'};
         }
 
       }
@@ -61,8 +108,8 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       $scope.getUser = function()
       {
         user = belt_factory.getUser();
-        console.log("0000000000")
-        console.log(user)
+        // console.log("0000000000")
+        // console.log(user)
         return user;
       }
 
@@ -71,24 +118,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         $location.url('/');
       }
 
-        $scope.register_user = function()
-      {
-        if($scope.user.first_name.length > 4)
-        {
-          console.log('inside register user client controller');
-          $scope.error = {};
-          console.log('$scope.user',$scope.user)
-          belt_factory.register_user($scope.user,setUsers);
-          console.log('$scope.user',$scope.user)
 
-          $scope.user = {};
-          $location.url('/');
-        }
-        else{
-          $scope.error = {message: 'Your name must be at least 4 characters long!'};
-        }
-     
-      }
 
       $scope.create_question = function()
       {
@@ -110,32 +140,58 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       $scope.create_answer_by_id = function()
       {
+        console.log('INSIDE create_answer_by_id')
         if($scope.newAnswer.answer.length > 5)
         {
+          console.log("inside create_answer_by_id if statement")
           $scope.error = {};
           // var user = belt_factory.getUser();
           // $scope.newAnswer.name=user;
           // var user = $scope.newAnswer.name;
           var user=belt_factory.getUser();
-          console.log("pppppppppppppppppppppppppppppp")
-          console.log("user")
-          console.log(user)
-          console.log($scope.newAnswer)
           belt_factory.create_answer_by_id($routeParams.id,$scope.newAnswer,user,function(data)
           {
+            console.log("routeParams.id", $routeParams.id)
             $scope.answer = data;
+            console.log("Data:")
             setAnswer(data);
+            console.log(data)
+            $scope.questions.push(data)
+            console.log($scope.questions[15])
+            //
+            // loop through questions
+            var question;
+            for (var x=0; x<$scope.questions.length;x++)
+            {
+              if($scope.questions[x]._id == data._question)
+              {
+                question = $scope.questions[x];
+              }
+            }
+            console.log('question',question)
+            // find question that matches data._question
+            console.log(question._answers)
+            // push answer (data) to that question
+            question._answers.push(data);
+
+            // $location.path('/question/'+ data._question)
+            // $route.reload();
+            location.reload()
+         
           })
-          $location.url('/')
+          
+          // $location.url('/')
         }
         else{
           $scope.error = {message: 'Your answer must be at least 5 characters long!'};
         }
       }
 
+
+
       $scope.show_user = function()
       {
-      	belt_factory.show($scope.user, function(data)
+      	belt_factory.show_user($scope.user, function(data)
         {
       	 $scope.user = data;
       	})
@@ -145,6 +201,9 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         belt_factory.index_question(function(data){
           $scope.questions = data;
           $scope.question = {};
+          console.log("index question:")
+          console.log($scope.questions)
+
         })
       }
 
@@ -161,7 +220,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       $scope.get_question_by_id = function()
       {
-        console.log('controller--get_question_by_id');
+        // console.log('controller--get_question_by_id');
         belt_factory.get_question_by_id($routeParams.id,function(data)
         {
           $scope.question = data;
@@ -173,9 +232,9 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         var increment = parseInt(likes) + 1;
         belt_factory.updateAnswer(answerId,increment,function(data)
         {
-          console.log('payload',data);
+          // console.log('payload',data);
           var url = '/';
-          console.log('redirect to /');
+          // console.log('redirect to /');
           $scope.get_question_by_id();
         });
       }

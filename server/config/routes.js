@@ -2,15 +2,15 @@ var path = require('path');
 var users = require('../controllers/users.js')//we can get functions from friends
 module.exports = function(app){
 	app.get('/', function(req, res) {
-		console.log('/users')
-   		users.index(req,res)
+		// console.log('/users')
+   		users.show_user(req,res)
     
 	})
 
 	
 
 	app.post('/questions',function(req,res){
-		console.log("POST DATA",req.body);
+		// console.log("POST DATA",req.body);
 		users.create_question(req,res)
 	})
 
@@ -27,6 +27,8 @@ module.exports = function(app){
 	app.post('/users', users.register_user);
 
 	app.get('/users',users.index_user);
+
+
 	
 
 }

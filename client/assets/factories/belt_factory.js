@@ -6,6 +6,7 @@ app.factory('belt_factory',function($http){
         // var user = {};
           var user;
           var current_user;
+          var logged_in_user;
 
       // factory.create_user = function(newUser)
       // {
@@ -14,8 +15,8 @@ app.factory('belt_factory',function($http){
       // }
 
       factory.create_user = function(user, callback){
-        console.log('inside create_user factory');
-        console.log('user',user);
+        // console.log('inside create_user factory');
+        // console.log('user',user);
 
         user = user;
         callback(user);
@@ -46,7 +47,7 @@ app.factory('belt_factory',function($http){
   {
     $http.post('/questions', newQuestion).then(function(returned_data)
     {
-      console.log('newQuestion',newQuestion)
+      // console.log('newQuestion',newQuestion)
       if (typeof(callback) == 'function')
       {
         callback(returned_data.data);
@@ -56,16 +57,28 @@ app.factory('belt_factory',function($http){
 
     factory.register_user = function(user,callback)
   {
+    console.log('inside register user client factory')
     $http.post('/users', user).then(function(returned_data)
     {
-      console.log('user',user)
+      // console.log('user',user)
+      console.log('returned_data in belt factory', user)
+      logged_in_user = user;
       if (typeof(callback) == 'function')
       {
         
-        callback(returned_data.data);
+        callback(user);
       }
     });
   }
+
+    factory.log_set_user = function(user, callback){
+    logged_in_user = user;
+    callback(logged_in_user);
+  }
+
+  factory.log_get_user = function(){
+        return logged_in_user;
+      }
 
     factory.index_question = function(callback)
     {
@@ -99,12 +112,13 @@ app.factory('belt_factory',function($http){
     }
 
        factory.create_answer_by_id = function(id,answerContent, user, callback){
-        console.log('create_answer_by_id in factory');
-        console.log('answerContent',answerContent)
-        console.log('user',user)
+        // console.log('create_answer_by_id in factory');
+        // console.log('answerContent',answerContent)
+        // console.log('user',user)
         $http.post('/answers/' + id,{name: user, answer: answerContent}).then(function(returned_data){
-          console.log('******returned_data.data*****',returned_data.data)
-          console.log('inside factory.create_answer_by_id');
+          // console.log('******returned_data.data*****',returned_data.data)
+          // console.log('inside factory.create_answer_by_id');
+          
           if(typeof(callback) == 'function'){
             callback(returned_data.data);
           }
@@ -113,11 +127,11 @@ app.factory('belt_factory',function($http){
        }
 
        factory.updateAnswer = function(answerId,likes,callback){
-        console.log('factory.updateAnswer,answerId:',answerId,'likes',likes);
+        // console.log('factory.updateAnswer,answerId:',answerId,'likes',likes);
         $http.put('/answers/'+answerId,{
           likes:likes
         }).then(function(returned_data){
-          console.log(returned_data.data);
+          // console.log(returned_data.data);
           if (typeof(callback)=='function'){
             callback(returned_data.data)
           }
