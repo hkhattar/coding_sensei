@@ -65,7 +65,7 @@ app.factory('belt_factory',function($http){
       logged_in_user = user;
       if (typeof(callback) == 'function')
       {
-        
+        console.log('user in belt factory', user)
         callback(user);
       }
     });
@@ -138,7 +138,17 @@ app.factory('belt_factory',function($http){
         })
        }
 
-
+       factory.checkSesh = function(cb)
+       { //checks to see if there is a session object
+          $http.get('/checksesh').then(function(response) 
+            { //get request to check if session has been created
+              if (typeof(cb) == 'function') 
+                { //if cb is a function...
+                  cb(response.data); //invoke cb and pass returned information (may be null/undefined!!)
+                }
+            })
+      };
+    
 
        
         return factory;

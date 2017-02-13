@@ -3,11 +3,26 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
     function($scope,$cookies,$location,$routeParams,belt_factory)
     {
       console.log('belt_controller loaded');
+      console.log('dash_controller loaded');
+      $scope.dash_user = {};
+      belt_factory.checkSesh(data => {
+        if (!data)
+        {
+          $location.url('/register');
+        }  
+        else 
+        {
+          $scope.dash_user = data;
+        }
+        
+
+                        })
       var answers = [];
       var answer = {};
       var users = [];
       $scope.error = {};
       $scope.users={};
+      // var logged_in_user;
       $scope.register_user = function()
       {
         if($scope.user.first_name.length > 1)
@@ -39,11 +54,23 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         $scope.questionss = data;
       }
       var logged_in_user ;
+
       function setUsers(data)
       {
+
         console.log('inside belt controller setUsers')
-        $scope.logged_in_user = data;
+        console.log('data',data)
+        logged_in_user = data;
         console.log('logged_in_user inside setUsers',logged_in_user)
+      }
+
+      function getUsers()
+      {
+        console.log('inside getusers');
+        logged_in_user =  belt_factory.getUsers();
+        return logged_in_user;
+
+
       }
     
       console.log('logged_in_user outside setUsers',logged_in_user)
@@ -205,6 +232,28 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
           $scope.get_question_by_id();
         });
       }
+
+
+      // $scope.dash_user = {};
+      // $scope.checkSesh = function()
+      // {
+      //      belt_factory.checkSesh(data => {
+
+      //   if (!data)
+      //   {
+      //     $location.url('/index');
+      //   }  
+      //   else 
+      //   {
+      //     $scope.dash_user = data;
+      //     console.log('$scope.dash_user',$scope.dash_user)
+      //   }
+        
+
+      //                   })
+
+      // }
+   
       $scope.get_question_by_id();
 
     }

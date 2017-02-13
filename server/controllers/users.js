@@ -11,6 +11,8 @@ var User = mongoose.model('User');
 module.exports = {
 
 
+
+
 	index_question: function(req,res){
 		// console.log("inside question index in routes");
 		Question.find({},false,true).populate('_answers').exec(function(err,questions){
@@ -59,8 +61,8 @@ module.exports = {
 		
 	},
 
-	register_user: function(req,res)
-	{
+
+	register_user: (req, res) =>{
 		console.log('inside register user server controller')
 		console.log('POST DATA',req.body);
 		
@@ -75,9 +77,20 @@ module.exports = {
 				 // res.json({
      //            _id: user._id
      //        	})
-				res.json(data.id)
+
+     			req.session.user = data; //create a session variable to store the returned data (new user)
+     			res.cookie('dash_user', data);
+				req.session.save(err2 => { //save session
+					if (err2) 
+					{ //if there's an error upon saving session...
+						console.log(err2);
+					} //req.session.save if
+									     });
+				res.json(data)
 				// _id: newuser._id
-				console.log('json',data.id)
+				console.log('json',data)
+				console.log('req.session.user',req.session.user)
+				
 			}
 
 		})
@@ -92,6 +105,7 @@ module.exports = {
 		.populate('_answers').exec(function(err,question){
 			// console.log('error', err);
 		})
+
 	},
 
 	create_answer: function(req,res)
@@ -148,18 +162,14 @@ module.exports = {
 				}
 			})
 
-	}
+	},
 
+	checkSesh: (req, res) =>{ //returns session to client-side (null if it does not exist)
+			res.json(req.cookies.dash_user);
+			// console.log('session',req.session.user)
+			console.log('Cookies: ', req.cookies.dash_user);
 
-
-
-
-
-
-
-
-
-
+		}
 
 
 }

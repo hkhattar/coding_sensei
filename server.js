@@ -1,5 +1,11 @@
 // Require the Express Module
 var express = require('express');
+
+// var session = require('express-session');
+var cookieParser = require('cookie-parser');
+// var json = require('express-json');
+var cookie = require('cookie');
+
 // Require path
 var path = require('path');
 // Create an Express App
@@ -10,7 +16,7 @@ var bodyParser = require('body-parser');
 // new code:
 var session = require('express-session');
 // original code:
-
+app.use(cookieParser());
 // more new code:
 app.use(session({secret: 'codingdojorocks'}));  // string for encryption
 

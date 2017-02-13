@@ -28,7 +28,7 @@ module.exports = function(app){
 
 	app.get('/users',users.index_user);
 
-
+	app.get('/checksesh', users.checkSesh); //checks to see if session exists (is user logged in?)
 	
 
 }
