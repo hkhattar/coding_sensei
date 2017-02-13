@@ -30,5 +30,7 @@ module.exports = function(app){
 
 	app.get('/checksesh', users.checkSesh); //checks to see if session exists (is user logged in?)
 	
+	app.get('/logout', users.logout); //logs user out
 
+	app.post('/users/login', users.login); 
 }

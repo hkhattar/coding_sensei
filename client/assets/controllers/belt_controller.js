@@ -105,6 +105,25 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       }
 
+      $scope.login = () => { //when the user hits the login button...
+      $scope.logErrors = []; //clear out all previous login errors
+      console.log('$scope.loginUser',$scope.loginUser)
+      belt_factory.login($scope.loginUser, data => { //run the userFactory.login method and pass the entered user information and a callback function
+        if (data.errors) { //if the returned data has an errors key...
+          for (let key in data.errors) { //for every key in the data.errors...
+            $scope.logErrors.push(data.errors[key].message); //push these errors to the logErrors array
+          }
+          $scope.loginUser = {}; //clear the login input fields
+          // second.focus(); //put the user's cursor back on the first input in login
+        } else if (data.errorsFront) { //if the returned data has the errorsFront key (custom)...
+          $scope.logErrors = data.errorsFront; //set logErrors to equal the returned errors...
+          // second.focus(); //put the user's cursor back on the first input in login
+        } else { //if no errors are returned...
+          $location.url('/'); //send the user to the dashboard with their respective user id
+        } //if/else
+      }); //userFactory.login
+    }; //$scope.login
+
       belt_factory.get_user(function(data)
       {
         $scope.current_user = data;

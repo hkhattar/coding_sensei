@@ -41,6 +41,72 @@
     <div class="col s18 m12 offset-m0">
       <div class="card">
         <div class="card-content">
+         <h2>About Us</h2>
+         <p>Coding Sensei connects you with people and information to solve problems,inspire learning and influence the future of technology.
+		It is a resource of tech interview questions from various companies.
+		You can crawl through the questions by entering any keyword or technologies.
+		The answers and solutions are supplied by the community of readers. You can add your own interview questions and also answer any questions. Moreover, you can like the answers posted by other users.
+</p>
+        </div>
+       
+          <div class='right-align'>
+        	<div class="card-action">
+          	 	<a href="#/index"  class="btn"  >GO BACK</a>
+          	</div>
+         
+        </div>
+
+      </div>
+    </div>
+</div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col s12 m6 offset-m3">
+      <div class="card">
+        <div class="card-content">
+         
+          <form>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Email" id="email" type="text" class="validate" ng-model='loginUser.email' name="email">
+                <label for="email" class="active"></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Password" id="password" type="text" class="validate" ng-model='loginUser.password' name="password">
+                {{ error.message }}
+                <label for="password" class="active"></label>
+              </div>
+            </div>
+            <input type="submit" class="btn" value="LOGIN" ng-click='login()'>
+          </form>
+          <p ng-repeat="error in logErrors">{{ error }}</p>
+        </div>
+        <div class="card-action">
+          <!-- <input type="submit" class="btn" value="LOGIN" ng-click='create_new_user()'> -->
+          <p>Don't have an account? 
+        <a href="#/register">Sign Up</a></p>
+        <br>
+        </div>
+        
+
+      </div>
+    </div>
+</div>
+</div>
+
+
+
+
+<div class="container">
+  <div class="row">
+    <div class="col s18 m12 offset-m0">
+      <div class="card">
+        <div class="card-content">
          
           <form>
             <div class="row">

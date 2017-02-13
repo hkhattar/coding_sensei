@@ -12,6 +12,7 @@ var path = require('path');
 var app = express();
 // Require body-parser (to receive post data from clients)
 // var bcrypt = require('bcryptjs');
+var bcrypt = require('bcrypt')
 var bodyParser = require('body-parser');
 // new code:
 var session = require('express-session');
