@@ -111,36 +111,46 @@
           <form>
             <div class="row">
               <div class="input-field col s12">
+          
                 <input placeholder="First Name" id="firstname" type="text" class="validate" ng-model='user.first_name' name="name">
+                {{ error.first }}
                 <label for="firstname" class="active"></label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <input placeholder="Last Name" id="lastname" type="text" class="validate" ng-model='user.last_name'>
-                {{ error.message }}
+                {{ error.last }}
                 <label for="lastname" class="active"></label>
               </div>
             </div>
               <div class="row">
               <div class="input-field col s12">
                 <input placeholder="User Name" id="username" type="text" class="validate" ng-model='user.user_name'>
-                {{ error.message }}
+                {{ error.username }}
                 <label for="username" class="active"></label>
               </div>
             </div>
              <div class="row">
               <div class="input-field col s12">
                 <input placeholder="Email" id="email" type="text" class="validate" ng-model='user.email'>
-                {{ error.message }}
+                {{ error.email }}
                 <label for="email" class="active"></label>
               </div>
             </div>
               <div class="row">
               <div class="input-field col s12">
-                <input placeholder="Password" id="password" type="password" class="validate" ng-model='user.password'>
-                {{ error.message }}
+                <input placeholder="Password" id="password" type="password" class="validate" ng-keyup="checkPword()" ng-keydown="checkPword()" ng-model='user.password'>
+                {{ error.password }}
                 <label for="password" class="active"></label>
+              </div>
+            </div>
+              <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Confirm Password" id="confirm_password" type="password" class="validate" ng-model='user.confirm_password'>
+                 {{ error.confirm_password }}
+                {{ error.message }}
+                <label for="confirm_password" class="active"></label>
               </div>
             </div>
              <input type="submit" class="btn" value="Sign Up" ng-click='register_user()'>
@@ -158,7 +168,7 @@
     </div>
 </div>
 </div>
-<br>{{ error.message }}
+
 
 <div class="container">
     <div class="section">

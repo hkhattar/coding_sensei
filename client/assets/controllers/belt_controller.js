@@ -2,6 +2,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
     function($scope,$cookies,$location,$routeParams,belt_factory)
     {
+   
       console.log('belt_controller loaded');
       console.log('dash_controller loaded');
       $scope.dash_user = {};
@@ -17,15 +18,65 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         
 
                         })
+      $scope.error = {};
+         var first = document.getElementById('firstname'), //stores the first input on registration
+      last = document.getElementById('lastname'), //stores the last name on registration
+      username = document.getElementById('username'), //stores the username on registration
+      pword = document.getElementById('password'),//password input
+      conf = document.getElementById('confirm_password'), //confirm input
+      pwordRegex =
+      /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()_+}{:;'?/><.;,])(?!.*\s).*$/; //regex to test password against
+      var emailRegex = /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$///regex to test email against
+        
+    // first.focus(); //on page load, puts the cursor in the register first name input field
+ 
+    //   $scope.checkPword = () => { //allows the password error box to be dynamically rendered and adds a red or green border to the password input based on the password entered matching the given regex
+    //   if (pword.value.match(pwordReg)) {
+    //     pword.style.border = "3px solid green";
+    //     $scope.error={password: ''}
+    //   } else {
+    //     pword.style.border = "3px solid red";
+    //     $scope.error = {password: 'Invalid password'};
+    //   }
+    // };
       var answers = [];
       var answer = {};
       var users = [];
-      $scope.error = {};
+      
       $scope.users={};
       // var logged_in_user;
       $scope.register_user = function()
       {
-        if($scope.user.first_name.length > 1)
+        $scope.error = {message: 'All fields are required'};
+        if($scope.user.user_name.length < 1)
+        {
+          $scope.error = {username: 'User name required'};
+          
+        }
+        else if($scope.user.first_name.length < 2)
+        {
+          $scope.error = {first: 'Invalid first name'};
+          
+        }
+        else if($scope.user.last_name.length < 2)
+        {
+          $scope.error = {last: 'Invalid last name'};
+          
+        }
+        else if (!$scope.user.email.match(emailRegex)) { //if the email entered does not match regex...
+          $scope.error = {email: 'Invalid email'};
+
+        }
+        else if (!$scope.user.password.match(pwordRegex)) { //if the password entered does not match regex...
+          $scope.error = {password: 'Password does not meet minimum requirements:Must be at least 8 characters in length and include at least 1 lowercase and 1 uppercase letter, 1 number, and 1 special character' }
+       
+        }
+        else if (!$scope.user.password.match($scope.user.confirm_password)) { //if the password entered does not match regex...
+          $scope.error = {confirm_password: 'Password and confirm password must match' }
+       
+        }
+
+        else
         {
           console.log('inside register user client controller');
           $scope.error = {};
@@ -34,9 +85,6 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
           console.log('$scope.user in belt controller after factory',$scope.user)
           $scope.user = {};
           $location.url('/');
-        }
-        else{
-          $scope.error = {message: 'Your name must be at least 2 characters long!'};
         }
      
       }
