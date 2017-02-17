@@ -41,30 +41,32 @@ app.factory('belt_factory',function($http){
   //   callback(current_question);
   // }
 
-  factory.create_question = function(newQuestion,callback)
-  {
-    $http.post('/questions', newQuestion).then(function(returned_data)
-    {
-      // console.log('newQuestion',newQuestion)
-      if (typeof(callback) == 'function')
-      {
-        callback(returned_data.data);
-      }
-    });
-  }
+  // factory.create_question = function(newQuestion,callback)
+  // {
+  //   console.log('inside create question factory')
+  //   $http.post('/questions', newQuestion).then(function(returned_data)
+  //   {
+  //     // console.log('newQuestion',newQuestion)
+  //     if (typeof(callback) == 'function')
+  //     {
+  //       callback(returned_data.data);
+  //       console.log('returned_data',returned_data)
+  //     }
+  //   });
+  // }
 
     factory.register_user = function(user,callback)
   {
     console.log('inside register user client factory')
     $http.post('/users', user).then(function(returned_data)
     {
-      console.log('user',user)
-      console.log('returned_data in belt factory', returned_data.data)
+      // console.log('user',user)
+      // console.log('returned_data in belt factory', returned_data.data)
       logged_in_user = returned_data.data;
-      console.log('logged_in_user inside register_user belt factory',logged_in_user)
+      // console.log('logged_in_user inside register_user belt factory',logged_in_user)
       if (typeof(callback) == 'function')
       {
-        console.log('user in belt factory', user)
+        // console.log('user in belt factory', user)
         callback(user);
       }
     });
@@ -76,7 +78,7 @@ app.factory('belt_factory',function($http){
   // }
 
   factory.log_get_user = function(){
-    console.log('inside log_get_user in factory*******logged_user', logged_in_user)
+    // console.log('inside log_get_user in factory*******logged_user', logged_in_user)
         return logged_in_user;
       }
 
@@ -114,8 +116,8 @@ app.factory('belt_factory',function($http){
     }
 
        factory.create_answer_by_id = function(id,answerContent, user, callback){
-        // console.log('create_answer_by_id in factory');
-        // console.log('answerContent',answerContent)
+        console.log('create_answer_by_id in factory');
+        console.log('answerContent',answerContent)
         // console.log('user',user)
         $http.post('/answers/' + id,{name: user, answer: answerContent}).then(function(returned_data){
           // console.log('******returned_data.data*****',returned_data.data)
@@ -127,6 +129,21 @@ app.factory('belt_factory',function($http){
         })
 
        }
+
+       factory.create_question = function(newQuestion,user,callback)
+      {
+        console.log('inside create question factory')
+        console.log('user',user)
+        $http.post('/questions', {user: user, question: newQuestion}).then(function(returned_data)
+        {
+          // console.log('newQuestion',newQuestion)
+          if (typeof(callback) == 'function')
+          {
+            callback(returned_data.data);
+            console.log('returned_data',returned_data)
+          }
+        });
+      }
 
        factory.updateAnswer = function(answerId,likes,callback){
         // console.log('factory.updateAnswer,answerId:',answerId,'likes',likes);
@@ -143,18 +160,18 @@ app.factory('belt_factory',function($http){
 
 
        factory.login = function(user, cb) { //logs user in based on entered information
-        console.log('inside factory login')
+        // console.log('inside factory login')
       let errors = []; //creates empty array to store errors
       // if (!user || !user.email ||
       //   !user.password) { //if any fields are left blank...
       //   errors.push('Please fill in all fields'); //pushes error to errors array
       // } else { //if all fields are filled in...
-        console.log('user',user)
+        // console.log('user',user)
         $http.post('/users/login',user).then(function(response)
         { //execute post request passing user object
-          console.log('user',user)
-          console.log('response',response)
-          console.log('inside http function factory login ')
+          // console.log('user',user)
+          // console.log('response',response)
+          // console.log('inside http function factory login ')
           if (typeof(cb) == 'function') { //if cb is a function...
             cb(response.data); //invoke cb and pass retrived information (logged in user)
           }
@@ -180,7 +197,7 @@ app.factory('belt_factory',function($http){
               if (typeof(cb) == 'function') 
                 { //if cb is a function...
                   cb(response.data); //invoke cb and pass returned information (may be null/undefined!!)
-                  console.log('response.data',response.data)
+                  // console.log('response.data',response.data)
                   logged_in_user = response.data
                 }
             })
@@ -189,7 +206,7 @@ app.factory('belt_factory',function($http){
     
 
       factory.log_get_user = function(){
-        console.log('inside belt factory log_get_user','logged_in_user',logged_in_user)
+        // console.log('inside belt factory log_get_user','logged_in_user',logged_in_user)
       
         return logged_in_user;
       }

@@ -4,7 +4,6 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
     {
    
       console.log('belt_controller loaded');
-      console.log('dash_controller loaded');
       $scope.dash_user = {};
       belt_factory.checkSesh(data => {
         if (!data)
@@ -79,11 +78,11 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
         else
         {
-          console.log('inside register user client controller');
+          // console.log('inside register user client controller');
           $scope.error = {};
-          console.log('$scope.user in belt controller before factory',$scope.user)
+          // console.log('$scope.user in belt controller before factory',$scope.user)
           belt_factory.register_user($scope.user,setUsers);
-          console.log('$scope.user in belt controller after factory',$scope.user)
+          // console.log('$scope.user in belt controller after factory',$scope.user)
           $scope.user = {};
           $location.url('/');
         }
@@ -93,8 +92,8 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
        $scope.log_get_user = function()
       {
         var user = belt_factory.log_get_user();
-        console.log("0000000000")
-        console.log(user)
+        // console.log("0000000000")
+        // console.log(user)
         return user.first_name;
       }
 
@@ -107,22 +106,22 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       function setUsers(data)
       {
 
-        console.log('inside belt controller setUsers')
-        console.log('data',data)
+        // console.log('inside belt controller setUsers')
+        // console.log('data',data)
         logged_in_user = data;
-        console.log('logged_in_user inside setUsers',logged_in_user)
+        // console.log('logged_in_user inside setUsers',logged_in_user)
       }
 
       function getUsers()
       {
-        console.log('inside getusers');
+        // console.log('inside getusers');
         logged_in_user =  belt_factory.getUser();
         return logged_in_user;
 
 
       }
     
-      console.log('logged_in_user outside setUsers',logged_in_user)
+      // console.log('logged_in_user outside setUsers',logged_in_user)
       // $scope.logged_in_user = 'logged_in_user';
 
       $scope.logged_in_user=logged_in_user;
@@ -156,7 +155,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       $scope.login = () => { //when the user hits the login button...
       $scope.logErrors = []; //clear out all previous login errors
-      console.log('$scope.loginUser',$scope.loginUser)
+      // console.log('$scope.loginUser',$scope.loginUser)
       belt_factory.login($scope.loginUser, data => { //run the userFactory.login method and pass the entered user information and a callback function
         if (data.errors) { //if the returned data has an errors key...
           for (let key in data.errors) { //for every key in the data.errors...
@@ -191,12 +190,15 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
 
       $scope.create_question = function()
       {
+        console.log('inside create_question')
         if($scope.newQuestion.question.length > 10)
         {
-          console.log('inside create question clinet controller');
+          // console.log('inside create question clinet controller');
           $scope.error = {};
-          console.log('$scope.newQuestion',$scope.newQuestion)
-          belt_factory.create_question($scope.newQuestion,setQuestions);
+          // console.log('$scope.newQuestion',$scope.newQuestion)
+          var user = belt_factory.log_get_user();
+          console.log('user',user)
+          belt_factory.create_question($scope.newQuestion,user,setQuestions);
 
           $scope.newQuestion = {};
           $location.url('/');
@@ -208,32 +210,28 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
       }
 
 
-
-
-
-
       $scope.create_answer_by_id = function()
       {
-        console.log('INSIDE create_answer_by_id')
-        console.log('$scope.newAnswer',$scope.newAnswer)
+        // console.log('INSIDE create_answer_by_id')
+        // console.log('$scope.newAnswer',$scope.newAnswer)
         if($scope.newAnswer.answer.length > 5)
         {
-          console.log("inside create_answer_by_id if statement")
+          // console.log("inside create_answer_by_id if statement")
           $scope.error = {};
           // var user = belt_factory.getUser();
           // $scope.newAnswer.name=user;
           // var user = $scope.newAnswer.name;
           var user=belt_factory.log_get_user();
-          console.log('*************user',user)
+          // console.log('*************user',user)
           belt_factory.create_answer_by_id($routeParams.id,$scope.newAnswer,user.first_name,function(data)
           {
-            console.log("routeParams.id", $routeParams.id)
+            // console.log("routeParams.id", $routeParams.id)
             $scope.answer = data;
-            console.log("Data:")
+            // console.log("Data:")
             setAnswer(data);
-            console.log(data)
+            // console.log(data)
             $scope.questions.push(data)
-            console.log($scope.questions[15])
+            // console.log($scope.questions[15])
             // loop through questions
             var question;
             for (var x=0; x<$scope.questions.length;x++)
@@ -243,12 +241,12 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
                 question = $scope.questions[x];
               }
             }
-            console.log('question',question)
+            // console.log('question',question)
             // find question that matches data._question
-            console.log(question._answers)
+            // console.log(question._answers)
             // push answer (data) to that question
             question._answers.push(data);
-            location.reload()
+            // location.reload()
          
           })
         }
@@ -258,7 +256,7 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         }
 
          $scope.$watch('newAnswer', function () {
-        console.log('QQQQQQQQQQQQQ',$scope.newAnswer); 
+        // console.log('QQQQQQQQQQQQQ',$scope.newAnswer); 
       });
       }
 
@@ -275,8 +273,8 @@ app.controller('belt_controller', ['$scope','$cookies','$location','$routeParams
         belt_factory.index_question(function(data){
           $scope.questions = data;
           $scope.question = {};
-          console.log("index question:")
-          console.log($scope.questions)
+          // console.log("index question:")
+          // console.log($scope.questions)
 
         })
       }

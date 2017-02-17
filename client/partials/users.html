@@ -9,7 +9,7 @@
       	<li><a href="#/">Home</a></li>
         <li><a href="#/new_question">Ask Questions</a></li>
         <li><a href="#/users">Users</a></li>
-        <li><a href="#/index">Log Out</a></li>
+        <li><a href="/logout">Log Out</a></li>
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -33,6 +33,7 @@
 								<th>Last Name</th>
 								<th>Email</th>
 								<th>User name</th>
+								<th>Number of questions asked by user</th>
 								
 							</tr>
 						</thead>
@@ -40,11 +41,12 @@
 							<tr>
 								
 							</tr>
-							<tr ng-repeat='user in users '>
+							<tr ng-repeat='user in users' >
 								<td>{{user.first_name}}</td>
 								<td>{{user.last_name}}</td>
 								<td>{{user.email}}</td>
 								<td>{{user.user_name}}</td>
+								<td>{{user._questions.length}}</td>
 								
 
 								

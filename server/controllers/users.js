@@ -40,26 +40,7 @@ module.exports = {
 		})
 	},
 
-	create_question: function(req,res)
-	{
-		// console.log('inside question create server controller')
-		// console.log('POST DATA',req.body);
-		
-		var question = new Question({question:req.body.question,description:req.body.description,category:req.body.category});
-		question.save(function(err,data){
-		
-			if(err){
-				console.log('ERR', err)
-			}
-			else{
-				res.json(data)
-				
-			}
 
-		})
-
-		
-	},
 
 
 	register_user: (req, res) =>{
@@ -141,16 +122,11 @@ module.exports = {
 
 	create_answer: function(req,res)
 	{
-		// console.log('create_answer in server controller');
 		Question.findOne({_id:req.params.id},function(err,question)
 		{
 			var answer = new Answer({details:req.body.answer.details, answer:req.body.answer.answer, name:req.body.name});
 
-			// console.log('POST DATA', req.body)
-			// console.log('req.body.answer.answer',req.body.answer.answer)
-			// console.log('req.body.name',req.body.name);
-			// console.log('answer',answer);
-			// console.log(question._id);
+		
 			answer._question = question._id;
 			// console.log('answer._question',answer._question)
 			question._answers.push(answer);
@@ -160,13 +136,11 @@ module.exports = {
 				{
 					if(err)
 					{
-						// console.log(error);
+						console.log(error);
 					}
 					else
 					{
-						// console.log('successfully added an answer');
-						// console.log('question',question)
-						// console.log('answer',answer)
+						
 						res.json(answer);
 					}
 
@@ -174,6 +148,51 @@ module.exports = {
 				
 			})
 		})
+	},
+
+		create_question: function(req,res)
+	{
+		console.log('inside question create server controller')
+		console.log('POST DATA',req.body.user._id);
+
+		User.findOne({_id:req.body.user._id},function(err,user){
+			var question = new Question({question:req.body.question.question,description:req.body.question.description,category:req.body.question.category});
+			question._user = user._id;
+			user._questions.push(question);
+			question.save(function(err)
+			{
+				user.save(function(err)
+				{
+					if(err)
+					{
+						console.log(error);
+					}
+					else
+					{
+						
+						res.json(question);
+					}
+
+				})
+				
+			})
+
+
+		})
+		
+		// question.save(function(err,data){
+		
+		// 	if(err){
+		// 		console.log('ERR', err)
+		// 	}
+		// 	else{
+		// 		res.json(data)
+				
+		// 	}
+
+		// })
+
+		
 	},
 
 	answer_update : function(req,res){
