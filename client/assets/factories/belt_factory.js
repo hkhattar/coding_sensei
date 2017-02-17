@@ -6,7 +6,7 @@ app.factory('belt_factory',function($http){
         // var user = {};
           var user;
           var current_user;
-          var logged_in_user;
+          var logged_in_user = {};
 
       // factory.create_user = function(newUser)
       // {
@@ -34,9 +34,7 @@ app.factory('belt_factory',function($http){
     callback(current_user);
   }
 
-  factory.getUser = function(){
-        return current_user;
-      }
+
 
   // factory.set_question = function(question,callback){
   //   current_question = question;
@@ -60,9 +58,10 @@ app.factory('belt_factory',function($http){
     console.log('inside register user client factory')
     $http.post('/users', user).then(function(returned_data)
     {
-      // console.log('user',user)
-      console.log('returned_data in belt factory', user)
-      logged_in_user = user;
+      console.log('user',user)
+      console.log('returned_data in belt factory', returned_data.data)
+      logged_in_user = returned_data.data;
+      console.log('logged_in_user inside register_user belt factory',logged_in_user)
       if (typeof(callback) == 'function')
       {
         console.log('user in belt factory', user)
@@ -71,14 +70,17 @@ app.factory('belt_factory',function($http){
     });
   }
 
-    factory.log_set_user = function(user, callback){
-    logged_in_user = user;
-    callback(logged_in_user);
-  }
+  //   factory.log_set_user = function(user, callback){
+  //   logged_in_user = user;
+  //   callback(logged_in_user);
+  // }
 
   factory.log_get_user = function(){
+    console.log('inside log_get_user in factory*******logged_user', logged_in_user)
         return logged_in_user;
       }
+
+
 
     factory.index_question = function(callback)
     {
@@ -178,10 +180,19 @@ app.factory('belt_factory',function($http){
               if (typeof(cb) == 'function') 
                 { //if cb is a function...
                   cb(response.data); //invoke cb and pass returned information (may be null/undefined!!)
+                  console.log('response.data',response.data)
+                  logged_in_user = response.data
                 }
             })
+
       };
     
+
+      factory.log_get_user = function(){
+        console.log('inside belt factory log_get_user','logged_in_user',logged_in_user)
+      
+        return logged_in_user;
+      }
 
        
         return factory;

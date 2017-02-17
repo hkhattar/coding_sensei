@@ -108,21 +108,24 @@ module.exports = {
 				} else { //if there is no error...
 					if (!data) { //but no user information is retrieved...
 						res.json({
-							'errorsFront': ["Email or Password incorrect"] //return this error to client-side
+							'errorsFront': ["Email or password incorrect"] //return this error to client-side
 						});
 					} else { //if user information IS retrieved...
-						// if (bcrypt.compareSync(req.body.password, data.password)) { //assuming the password entered matches that in the DB for that user...
+						console.log('req.body.password',req.body.password)
+						console.log('data.password',data.password)
+						if (req.body.password === data.password) { //assuming the password entered matches that in the DB for that user...
 							res.cookie('dash_user', data);
 							
 						
 							res.json(data); //return the user information to client-side
-						// } else { //if password entered does NOT match that as retrieved from the DB...
-						// 	res.json({ //return this error to client-side
-						// 		'errorsFront': ["Email or Password incorrect"]
-						// 	});
+						} else { //if password entered does NOT match that as retrieved from the DB...
+							res.json({ //return this error to client-side
+								'errorsFront': ["Email or Password incorrect"]
+							});
 						// } //password no matchy else
 					} //if user information is retrieved else
 				} //if there is no error when searching for user else
+			}
 			}); //User.findOne
 		},
 

@@ -28,7 +28,9 @@ if (2 > 0) {
 
 
 
-<h5 class='right-align'> <pre>{{getUser()}}   </pre>    </h5>
+<h5 class='right-align'> <pre>{{dash_user.first_name}}   </pre>    </h5>
+{{log_get_user()}}
+
 <!-- <p>{{users}}</p> -->
 <!-- <p>{{logged_in_user}}</p> -->
 <!-- <p>{{log_get_user()}}</p> -->
@@ -150,11 +152,21 @@ if (2 > 0) {
 								<label for="details" class="active"></label> 
 							</div>
 						</div>
-						<input type="hidden" ng-model="newAnswer.name" value="current_user">
-						
+						<!-- <input  type="text"  id="newAnswer.name" name='name' ng-model="newAnswer.name" ng-init=" newAnswer.name = dash_user.first_name"  > -->
+<!-- 
+						<input type="hidden" ng-model="newAnswer.name" value="hello"> -->
+					<!-- 	<input type="hidden" ng-model="newAnswer.name"  ng-init="newAnswer.name = {{dash_user.first_name}}"/> -->
+
 						<input type="submit" name="submit" value="Submit" ng-click="create_answer_by_id()" class="btn">
+
+
 						<!-- <button ng-click ='cancel()' class='btn'>Cancel</button> -->
 					</form>
+
+
+
+
+
 
 					<br>{{ error.message }}
 

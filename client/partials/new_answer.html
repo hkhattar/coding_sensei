@@ -1,4 +1,5 @@
 {{current_user}}
+{{dash_user.first_name}}
 
 <a href="#/" class="btn">Home</a>
 <a href="#/question/{{question._id}}" class='btn'>Go back to question</a>
@@ -50,7 +51,7 @@
 								<label for="details" class="active"></label> 
 							</div>
 						</div>
-						<input type="hidden" ng-model="newAnswer.name" value="current_user">
+						<input type="hidden" ng-model="newAnswer.name" value="{{dash_user.first_name}}">
 						
 						<input type="submit" name="submit" value="Submit" ng-click="create_answer_by_id()" class="btn">
 						<button ng-click ='cancel()' class='btn'>Cancel</button>

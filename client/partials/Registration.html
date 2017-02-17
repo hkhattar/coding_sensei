@@ -12,6 +12,7 @@
         <li><a href="#/register">Sign Up</a></li>
         <li><a href="#/index">Log In</a></li>
         <li><a href="#/about">About Us</a></li>
+
       </ul>
 
       <ul id="nav-mobile" class="side-nav">
@@ -36,33 +37,12 @@
     </div>
   </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col s18 m12 offset-m0">
-      <div class="card">
-        <div class="card-content">
-         <h2>About Us</h2>
-         <p>Coding Sensei connects you with people and information to solve problems,inspire learning and influence the future of technology.
-		It is a resource of tech interview questions from various companies.
-		You can crawl through the questions by entering any keyword or technologies.
-		The answers and solutions are supplied by the community of readers. You can add your own interview questions and also answer any questions. Moreover, you can like the answers posted by other users.
-</p>
-        </div>
-       
-          <div class='right-align'>
-        	<div class="card-action">
-          	 	<a href="#/index"  class="btn"  >GO BACK</a>
-          	</div>
-         
-        </div>
+  
+  		
 
-      </div>
-    </div>
-</div>
-</div>
+    
 
-
-<div class="container">
+<!--   <div class="container">
   <div class="row">
     <div class="col s12 m6 offset-m3">
       <div class="card">
@@ -81,10 +61,74 @@
                 {{ error.message }}
                 <label for="password" class="active"></label>
               </div>
+               <p ng-repeat="error in logErrors">{{ error }}</p>
             </div>
             <input type="submit" class="btn" value="LOGIN" ng-click='login()'>
+
           </form>
-          <p ng-repeat="error in logErrors">{{ error }}</p>
+         
+        </div>
+        <div class="card-action">
+          <!<input type="submit" class="btn" value="LOGIN" ng-click='create_new_user()'> -->
+          <!-- <p>Don't have an account? 
+        <a href="#/register">Sign Up</a></p>
+        <br>
+        </div>
+        
+
+      </div>
+    </div>
+</div>
+</div> --> 
+
+<div id='parent_div_1'>
+	<div class ='child_div_1'>
+		<div class="container">
+  			<div class="row">
+    			<!-- <div class="col s11 m6 offset-m0">
+	      			<div class="card">
+	        			<div class="card-content">
+	         				<h2>About Us</h2>
+					        <p>Coding Sensei connects you with people and information to solve problems,inspire learning and influence the future of technology.
+							It is a resource of tech interview questions from various companies.
+							You can crawl through the questions by entering any keyword or technologies.
+							The answers and solutions are supplied by the community of readers. You can add your own interview questions and also answer any questions. Moreover, you can like the answers posted by other users.
+							</p>
+	        			</div>
+	       
+			          	<div class='right-align'>
+			        		<div class="card-action">
+			          	 		<a href="#/index"  class="btn"  >GO BACK</a>
+			          	</div>
+			         
+			        	</div>
+
+	      			</div>
+	    		</div> -->
+
+	    		 <div class="col s11 m6 offset-m0">
+      <div class="card">
+        <div class="card-content">
+         
+          <form>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Email" id="email" type="text" class="validate" ng-model='loginUser.email' name="email">
+                <label for="email" class="active"></label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input placeholder="Password" id="password" type="text" class="validate" ng-model='loginUser.password' name="password">
+                {{ error.message }}
+                <label for="password" class="active"></label>
+              </div>
+               <p ng-repeat="error in logErrors">{{ error }}</p>
+            </div>
+            <input type="submit" class="btn" value="LOGIN" ng-click='login()'>
+
+          </form>
+         
         </div>
         <div class="card-action">
           <!-- <input type="submit" class="btn" value="LOGIN" ng-click='create_new_user()'> -->
@@ -96,78 +140,82 @@
 
       </div>
     </div>
-</div>
-</div>
 
-
-
-
-<div class="container">
-  <div class="row">
-    <div class="col s18 m12 offset-m0">
-      <div class="card">
-        <div class="card-content">
+	    		<div class="col s11 m6 offset-m0">
+      				<div class="card">
+        				<div class="card-content">
          
-          <form>
-            <div class="row">
-              <div class="input-field col s12">
-          
-                <input placeholder="First Name" id="firstname" type="text" class="validate" ng-model='user.first_name' name="name">
-                {{ error.first }}
-                <label for="firstname" class="active"></label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Last Name" id="lastname" type="text" class="validate" ng-model='user.last_name'>
-                {{ error.last }}
-                <label for="lastname" class="active"></label>
-              </div>
-            </div>
-              <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="User Name" id="username" type="text" class="validate" ng-model='user.user_name'>
-                {{ error.username }}
-                <label for="username" class="active"></label>
-              </div>
-            </div>
-             <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Email" id="email" type="text" class="validate" ng-model='user.email'>
-                {{ error.email }}
-                <label for="email" class="active"></label>
-              </div>
-            </div>
-              <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Password" id="password" type="password" class="validate" ng-keyup="checkPword()" ng-keydown="checkPword()" ng-model='user.password'>
-                {{ error.password }}
-                <label for="password" class="active"></label>
-              </div>
-            </div>
-              <div class="row">
-              <div class="input-field col s12">
-                <input placeholder="Confirm Password" id="confirm_password" type="password" class="validate" ng-model='user.confirm_password'>
-                 {{ error.confirm_password }}
-                {{ error.message }}
-                <label for="confirm_password" class="active"></label>
-              </div>
-            </div>
-             <input type="submit" class="btn" value="Sign Up" ng-click='register_user()'>
-          </form>
-        </div>
-        <div class="card-action">
-         
-           <p>Already have an account? 
-        <a href="#/index">Sign In</a></p>
-        <br>
-        </div>
-       
+	          				<form>
+	            				<div class="row">
+	              					<div class="input-field col s12">
+	          
+						                <input placeholder="First Name" id="firstname" type="text" class="validate" ng-model='user.first_name' name="name">
+						                {{ error.first }}
+						                <label for="firstname" class="active"></label>
+	              					</div>
+	            				</div>
+					            <div class="row">
+					              <div class="input-field col s12">
+					                <input placeholder="Last Name" id="lastname" type="text" class="validate" ng-model='user.last_name'>
+					                {{ error.last }}
+					                <label for="lastname" class="active"></label>
+					              </div>
+					            </div>
+					              <div class="row">
+					              <div class="input-field col s12">
+					                <input placeholder="User Name" id="username" type="text" class="validate" ng-model='user.user_name'>
+					                {{ error.username }}
+					                <label for="username" class="active"></label>
+					              </div>
+					            </div>
+					             <div class="row">
+					              <div class="input-field col s12">
+					                <input placeholder="Email" id="email" type="text" class="validate" ng-model='user.email'>
+					                {{ error.email }}
+					                <label for="email" class="active"></label>
+					              </div>
+					            </div>
+					              <div class="row">
+					              <div class="input-field col s12">
+					                <input placeholder="Password" id="password" type="password" class="validate" ng-keyup="checkPword()" ng-keydown="checkPword()" ng-model='user.password'>
+					                {{ error.password }}
+					                <label for="password" class="active"></label>
+					              </div>
+					            </div>
+					              <div class="row">
+					              <div class="input-field col s12">
+					                <input placeholder="Confirm Password" id="confirm_password" type="password" class="validate" ng-model='user.confirm_password'>
+					                 {{ error.confirm_password }}
+					                {{ error.message }}
+					                <label for="confirm_password" class="active"></label>
+					              </div>
+					            </div>
+					             <input type="submit" class="btn" value="Sign Up" ng-click='register_user()'>
+					          </form>
+				        </div>
+				        <div class="card-action">
+				         
+				           <p>Already have an account? 
+				        	<a href="#/index">Sign In</a></p>
+				        	<br>
+				        </div>
+				       
 
-      </div>
-    </div>
+				      </div>
+				    </div>
+
+			</div>
+		</div>
+	</div>
+	<!-- <div class ='child_div_2'>
+		<div class="container">
+  			<div class="row">
+    			
+				</div>
+			</div>
+	</div> -->
 </div>
-</div>
+
 
 
 <div class="container">
@@ -214,7 +262,10 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">About us</h5>
-          <p class="grey-text text-lighten-4">Interview question and answers website</p>
+          <p class="grey-text text-lighten-4">Coding Sensei connects you with people and information to solve problems,inspire learning and influence the future of technology.
+							It is a resource of tech interview questions from various companies.
+							You can crawl through the questions by entering any keyword or technologies.
+							The answers and solutions are supplied by the community of readers. You can add your own interview questions and also answer any questions. Moreover, you can like the answers posted by other users.</p>
 
 
         </div>
